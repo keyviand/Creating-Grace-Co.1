@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "name": "Custom Tote Bag",
+      "price": "$35",
+      "category": "Bags",
+      "description": "A handmade tote bag made with care and custom fabric options.",
+      "image": "logo.svg",
+      "status": "Available"
+    },
+    {
+      "name": "Personalized Pillow Cover",
+      "price": "$25",
+      "category": "Home",
+      "description": "Soft decorative pillow covers for bedrooms, couches, and gifts.",
+      "image": "logo.svg",
+      "status": "Available"
+    },
+    {
+      "name": "Handmade Apron",
+      "price": "$30",
+      "category": "Kitchen",
+      "description": "A practical handmade apron for cooking, crafting, or gifting.",
+      "image": "logo.svg",
+      "status": "Available"
+    }
+  ]
+}

@@ -1,30 +1,10 @@
-// ===============================
-// Creating Grace Co.
-// GitHub Pages + Google Sheet CMS
-// ===============================
-
-// STEP 1:
-// Create a Google Sheet with columns:
-// name | price | category | description | image | status
-//
-// STEP 2:
-// In Google Sheets, go to File > Share > Publish to web.
-// Publish the sheet as CSV.
-//
-// STEP 3:
-// Paste the CSV link below between the quotes.
-// Keep it blank to use the fallback products from products.js.
-const GOOGLE_SHEET_CSV_URL = "";
-
-// Change this to the real business email.
-const BUSINESS_EMAIL = "creatinggrace@example.com";
-
 const productGrid = document.getElementById("productGrid");
 const categoryFilter = document.getElementById("categoryFilter");
 const searchInput = document.getElementById("searchInput");
-const sheetNote = document.getElementById("sheetNote");
 
 let products = [];
+let siteSettings = {};
+let businessEmail = "creatinggrace@example.com";
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -32,70 +12,33 @@ document.getElementById("menuButton").addEventListener("click", () => {
   document.getElementById("navLinks").classList.toggle("open");
 });
 
-function csvToObjects(csvText) {
-  const rows = csvText.trim().split(/\r?\n/).map(parseCSVRow);
-  const headers = rows.shift().map((header) => header.trim().toLowerCase());
+async function loadSiteSettings() {
+  try {
+    const response = await fetch(`site-settings.json?cache=${Date.now()}`);
+    siteSettings = await response.json();
+    businessEmail = siteSettings.email || businessEmail;
 
-  return rows
-    .filter((row) => row.some((cell) => cell.trim() !== ""))
-    .map((row) => {
-      const product = {};
-      headers.forEach((header, index) => {
-        product[header] = row[index] ? row[index].trim() : "";
-      });
-      return product;
+    document.querySelectorAll("[data-setting]").forEach((element) => {
+      const key = element.getAttribute("data-setting");
+      if (siteSettings[key]) element.textContent = siteSettings[key];
     });
-}
 
-function parseCSVRow(row) {
-  const result = [];
-  let current = "";
-  let insideQuotes = false;
-
-  for (let i = 0; i < row.length; i++) {
-    const char = row[i];
-    const nextChar = row[i + 1];
-
-    if (char === '"' && insideQuotes && nextChar === '"') {
-      current += '"';
-      i++;
-    } else if (char === '"') {
-      insideQuotes = !insideQuotes;
-    } else if (char === "," && !insideQuotes) {
-      result.push(current);
-      current = "";
-    } else {
-      current += char;
-    }
+    document.title = `${siteSettings.businessName || "Creating Grace Co."} | Handmade Creations`;
+  } catch (error) {
+    console.warn("Could not load site settings.", error);
   }
-
-  result.push(current);
-  return result;
 }
 
 async function loadProducts() {
-  if (!GOOGLE_SHEET_CSV_URL) {
-    products = window.FALLBACK_PRODUCTS;
-    sheetNote.textContent =
-      "Demo products are showing. Connect Google Sheets in app.js when you are ready.";
-    setupCategories(products);
-    renderProducts(products);
-    return;
-  }
-
   try {
-    const response = await fetch(GOOGLE_SHEET_CSV_URL);
-    const csvText = await response.text();
-    products = csvToObjects(csvText);
-    sheetNote.textContent = "Products loaded from the private owner-managed product sheet.";
+    const response = await fetch(`products.json?cache=${Date.now()}`);
+    const data = await response.json();
+    products = data.products || [];
     setupCategories(products);
     renderProducts(products);
   } catch (error) {
-    products = window.FALLBACK_PRODUCTS;
-    sheetNote.textContent =
-      "Could not load Google Sheet, so demo products are showing. Check the CSV link in app.js.";
-    setupCategories(products);
-    renderProducts(products);
+    productGrid.innerHTML = "<p>Products could not be loaded.</p>";
+    console.error(error);
   }
 }
 
@@ -124,8 +67,10 @@ function renderProducts(productList) {
     const card = document.createElement("article");
     card.className = "product-card";
 
+    const image = product.image || "logo.svg";
+
     card.innerHTML = `
-      <img class="product-image" src="${product.image || "logo.svg"}" alt="${product.name || "Product image"}" />
+      <img class="product-image" src="${image}" alt="${product.name || "Product image"}" />
       <div class="product-content">
         <span class="badge">${product.status || "Available"}</span>
         <h3>${product.name || "Untitled Product"}</h3>
@@ -174,14 +119,10 @@ document.getElementById("orderForm").addEventListener("submit", (event) => {
     `Name: ${name}\nEmail: ${email}\nRequest Type: ${requestType}\n\nMessage:\n${message}`
   );
 
-  window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:${businessEmail}?subject=${subject}&body=${body}`;
 
   document.getElementById("formStatus").textContent =
     "Your email app should open with the request ready to send.";
 });
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-
-loadProducts();
+Promise.all([loadSiteSettings(), loadProducts()]);

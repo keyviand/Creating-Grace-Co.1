@@ -1,88 +1,133 @@
-# Creating Grace Co. GitHub Website
+# Creating Grace Co. — GitHub Pages + Decap CMS
 
-This version is designed for GitHub Pages, but your wife can still update products from her phone without editing code.
-
-## How the editing works
-
-The public website is hosted on GitHub Pages.
-
-Your wife updates products in a private Google Sheet from the Google Sheets phone app.
-
-The public can view the website, but they cannot edit products unless you give them access to the Google Sheet.
-
-## Google Sheet columns
-
-Create a Google Sheet with this exact first row:
+This version keeps the website on GitHub and adds an owner admin page:
 
 ```text
-name, price, category, description, image, status
+yourwebsite.com/admin
 ```
 
-Example row:
+Your wife can edit products, prices, photos, and website text from the admin page without touching code.
+
+## Important truth
+
+GitHub Pages alone is static. The `/admin` page can be added, but secure login needs GitHub/Decap authentication.
+
+This package uses Decap CMS with the GitHub backend. That means your wife needs:
+- a GitHub account
+- permission to edit the repository
+- Decap/GitHub authentication configured
+
+Public visitors cannot edit the site.
+
+## Files that matter
+
+- `index.html` — public website
+- `products.json` — product list Decap edits
+- `site-settings.json` — business text/contact info Decap edits
+- `admin/index.html` — Decap CMS admin page
+- `admin/config.yml` — Decap CMS settings
+- `images/uploads` — uploaded product photos
+
+## Setup steps
+
+### 1. Upload to GitHub
+
+Upload all files to your GitHub repository.
+
+### 2. Edit `admin/config.yml`
+
+Change this:
+
+```yml
+repo: YOUR-GITHUB-USERNAME/YOUR-REPO-NAME
+```
+
+Example:
+
+```yml
+repo: mmorgan824/creating-grace-co
+```
+
+### 3. Turn on GitHub Pages
+
+Go to:
 
 ```text
-Custom Tote Bag, $35, Bags, Handmade tote bag with custom fabric options, https://your-image-link.com/photo.jpg, Available
+Settings > Pages
 ```
 
-## How to connect the sheet
+Use:
+- Branch: `main`
+- Folder: `/root`
 
-1. Create a Google Sheet.
-2. Add the column names:
-   - name
-   - price
-   - category
-   - description
-   - image
-   - status
-3. On a computer, go to **File > Share > Publish to web**.
-4. Choose the product sheet/tab.
-5. Choose **CSV**.
-6. Copy the published CSV link.
-7. Open `app.js`.
-8. Paste the link here:
+### 4. Give your wife access
 
-```js
-const GOOGLE_SHEET_CSV_URL = "PASTE_LINK_HERE";
+In GitHub:
+
+```text
+Repository > Settings > Collaborators
 ```
 
-## How your wife updates from her phone
+Add your wife’s GitHub account.
 
-1. Open the Google Sheets app.
-2. Open the product sheet.
-3. Change the product name, price, description, status, or image link.
-4. The website updates automatically after refreshing.
+### 5. Admin login
 
-## Important photo note
+After the site is live, go to:
 
-The `image` column needs a direct image URL.
+```text
+https://yourwebsite.com/admin
+```
 
-Easy options:
-- Upload product photos to GitHub in an `images` folder and paste the image path.
-- Use a public image link from a photo host.
-- Use Canva or another public image link if it displays as an image.
+She can edit:
+- products
+- prices
+- categories
+- product photos
+- status
+- homepage text
+- about text
+- email/phone/social
 
-## GitHub Pages upload
+## About authentication
 
-1. Create a GitHub repository named something like `creating-grace-co`.
-2. Upload these files.
-3. Go to **Settings > Pages**.
-4. Select branch: `main`.
-5. Select folder: `/root`.
-6. Save.
-7. Your website will publish.
+Decap CMS's GitHub backend needs authentication. Decap's official docs explain that the CMS is a web UI for Git workflow and it uses a Git backend such as GitHub. For GitHub, users must have push access to the content repository.
+
+If login does not work immediately from GitHub Pages, you will need a GitHub OAuth helper. Common choices are:
+- Netlify Identity/Git Gateway while still keeping the repo on GitHub
+- a small OAuth server
+- a Decap CMS OAuth provider
+
+The simplest beginner-friendly route is hosting the same GitHub repo through Netlify while keeping all code in GitHub. But if you want GitHub Pages only, OAuth setup is the part that needs extra configuration.
+
+## How she edits from phone
+
+1. Open the site.
+2. Go to `/admin`.
+3. Log in.
+4. Tap `Store`.
+5. Tap `Products`.
+6. Add/edit products.
+7. Upload photo.
+8. Save/publish.
 
 ## Custom domain
 
-In GitHub Pages, enter the correct domain, usually:
+Use the real domain, usually:
 
 ```text
 creating-grace-co.com
 ```
 
-or
+or:
 
 ```text
 www.creating-grace-co.com
 ```
 
-Do not use `creating-grace-co.1.com` unless that is truly the domain your provider gave you.
+Do not use:
+
+```text
+creating-grace-co.1.com
+```
+
+unless your domain provider specifically gave that as your real domain.

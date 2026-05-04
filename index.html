@@ -18,7 +18,7 @@
   <header class="top-bar">
     <a class="brand" href="#home">
       <img src="logo.svg" alt="Creating Grace Co. logo" />
-      <span>Creating Grace Co.</span>
+      <span data-setting="businessName">Creating Grace Co.</span>
     </a>
 
     <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
@@ -28,15 +28,16 @@
       <a href="#custom">Custom Orders</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="admin/" class="admin-link">Owner Login</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="home">
       <div class="hero-text">
-        <p class="eyebrow">Handmade with love, care, and grace</p>
-        <h1>Beautiful handmade pieces made for everyday life and special moments.</h1>
-        <p>
+        <p class="eyebrow" data-setting="tagline">Handmade with love, care, and grace</p>
+        <h1 data-setting="heroTitle">Beautiful handmade pieces made for everyday life and special moments.</h1>
+        <p data-setting="heroText">
           Welcome to Creating Grace Co. — a handmade shop for custom sewing creations,
           thoughtful gifts, and unique pieces made with care.
         </p>
@@ -48,15 +49,14 @@
 
       <div class="hero-image-card">
         <img src="logo.svg" alt="Creating Grace Co. app icon" />
-        <h2>Save Us Like an App</h2>
-        <p>Customers can add this site to their phone home screen.</p>
+        <h2>Creating Grace Co.</h2>
+        <p>Handmade items, custom gifts, and graceful details.</p>
       </div>
     </section>
 
-    <section class="announcement">
+    <section class="owner-note">
       <p>
-        <strong>Owner update:</strong> Products on this site can be updated from a private Google Sheet.
-        Your wife can change photos, names, descriptions, and prices from her phone without touching code.
+        <strong>Owner access:</strong> Go to <a href="admin/">/admin</a> to update products, photos, prices, and text after setup.
       </p>
     </section>
 
@@ -64,7 +64,7 @@
       <div class="section-heading">
         <p class="eyebrow">Shop</p>
         <h2>Featured Creations</h2>
-        <p>These items load from the product list. Connect a Google Sheet when ready.</p>
+        <p>Browse handmade pieces and request custom work.</p>
       </div>
 
       <div class="products-toolbar">
@@ -75,7 +75,6 @@
       </div>
 
       <div class="product-grid" id="productGrid"></div>
-      <p class="sheet-note" id="sheetNote"></p>
     </section>
 
     <section class="section soft" id="custom">
@@ -84,8 +83,7 @@
           <p class="eyebrow">Custom Orders</p>
           <h2>Have an idea? Request a custom handmade piece.</h2>
           <p>
-            Customers can send a custom request by email. Replace the email address in
-            <code>app.js</code> with the real business email.
+            Send a custom request for colors, size, gift details, or special designs.
           </p>
         </div>
 
@@ -124,11 +122,10 @@
     <section class="section" id="about">
       <div class="about-card">
         <p class="eyebrow">About</p>
-        <h2>Made with purpose and grace.</h2>
-        <p>
+        <h2 data-setting="aboutTitle">Made with purpose and grace.</h2>
+        <p data-setting="aboutText">
           Creating Grace Co. is built around handmade creativity, thoughtful detail,
-          and pieces that feel personal. Every item is made with attention, patience,
-          and care.
+          and pieces that feel personal.
         </p>
       </div>
     </section>
@@ -137,18 +134,17 @@
       <div class="contact-card">
         <p class="eyebrow">Contact</p>
         <h2>Get in touch</h2>
-        <p><strong>Email:</strong> creatinggrace@example.com</p>
-        <p><strong>Phone:</strong> (000) 000-0000</p>
-        <p><strong>Facebook/Instagram:</strong> @creatinggraceco</p>
+        <p><strong>Email:</strong> <span data-setting="email">creatinggrace@example.com</span></p>
+        <p><strong>Phone:</strong> <span data-setting="phone">(000) 000-0000</span></p>
+        <p><strong>Facebook/Instagram:</strong> <span data-setting="social">@creatinggraceco</span></p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> Creating Grace Co. All rights reserved.</p>
+    <p>© <span id="year"></span> <span data-setting="businessName">Creating Grace Co.</span>. All rights reserved.</p>
   </footer>
 
-  <script src="products.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
