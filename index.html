@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Creating Grace Co. | Handmade Creations</title>
+  <meta name="description" content="Creating Grace Co. offers handmade sewing creations, custom gifts, and graceful everyday pieces." />
+  <meta name="theme-color" content="#9f6b53" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="logo.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="top-bar">
+    <a class="brand" href="#home">
+      <img src="logo.svg" alt="Creating Grace Co. logo" />
+      <span>Creating Grace Co.</span>
+    </a>
+
+    <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
+
+    <nav id="navLinks">
+      <a href="#shop">Shop</a>
+      <a href="#custom">Custom Orders</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <p class="eyebrow">Handmade with love, care, and grace</p>
+        <h1>Beautiful handmade pieces made for everyday life and special moments.</h1>
+        <p>
+          Welcome to Creating Grace Co. — a handmade shop for custom sewing creations,
+          thoughtful gifts, and unique pieces made with care.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#shop">View Creations</a>
+          <a class="button secondary" href="#custom">Request Custom Order</a>
+        </div>
+      </div>
+
+      <div class="hero-image-card">
+        <img src="logo.svg" alt="Creating Grace Co. app icon" />
+        <h2>Save Us Like an App</h2>
+        <p>Customers can add this site to their phone home screen.</p>
+      </div>
+    </section>
+
+    <section class="announcement">
+      <p>
+        <strong>Owner update:</strong> Products on this site can be updated from a private Google Sheet.
+        Your wife can change photos, names, descriptions, and prices from her phone without touching code.
+      </p>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-heading">
+        <p class="eyebrow">Shop</p>
+        <h2>Featured Creations</h2>
+        <p>These items load from the product list. Connect a Google Sheet when ready.</p>
+      </div>
+
+      <div class="products-toolbar">
+        <input id="searchInput" type="search" placeholder="Search creations..." />
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+      <p class="sheet-note" id="sheetNote"></p>
+    </section>
+
+    <section class="section soft" id="custom">
+      <div class="custom-grid">
+        <div>
+          <p class="eyebrow">Custom Orders</p>
+          <h2>Have an idea? Request a custom handmade piece.</h2>
+          <p>
+            Customers can send a custom request by email. Replace the email address in
+            <code>app.js</code> with the real business email.
+          </p>
+        </div>
+
+        <form id="orderForm">
+          <label>
+            Name
+            <input id="name" type="text" required placeholder="Your name" />
+          </label>
+
+          <label>
+            Email
+            <input id="email" type="email" required placeholder="your@email.com" />
+          </label>
+
+          <label>
+            What are you interested in?
+            <select id="requestType">
+              <option>Custom sewing creation</option>
+              <option>Featured product</option>
+              <option>Gift order</option>
+              <option>Bulk order</option>
+            </select>
+          </label>
+
+          <label>
+            Message
+            <textarea id="message" required placeholder="Tell us colors, size, date needed, and details..."></textarea>
+          </label>
+
+          <button class="button primary" type="submit">Create Email Request</button>
+          <p id="formStatus"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="about-card">
+        <p class="eyebrow">About</p>
+        <h2>Made with purpose and grace.</h2>
+        <p>
+          Creating Grace Co. is built around handmade creativity, thoughtful detail,
+          and pieces that feel personal. Every item is made with attention, patience,
+          and care.
+        </p>
+      </div>
+    </section>
+
+    <section class="section soft" id="contact">
+      <div class="contact-card">
+        <p class="eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <p><strong>Email:</strong> creatinggrace@example.com</p>
+        <p><strong>Phone:</strong> (000) 000-0000</p>
+        <p><strong>Facebook/Instagram:</strong> @creatinggraceco</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Creating Grace Co. All rights reserved.</p>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Creating Grace Co.",
+  "short_name": "Grace Co.",
+  "description": "Handmade sewing creations and custom gifts.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fffaf5",
+  "theme_color": "#9f6b53",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
