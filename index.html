@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KIT Creations | Sewing + Custom IT Apps</title>
+  <meta name="description" content="Shop handmade sewing creations and request custom IT apps, websites, and tech solutions." />
+  <meta name="theme-color" content="#111827" />
+
+  <!-- Home screen / PWA settings -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="logo.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <img src="logo.svg" alt="KIT Creations logo" />
+        <span>KIT Creations</span>
+      </a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#shop">Shop</a>
+        <a href="#it-services">IT Services</a>
+        <a href="#custom-order">Custom Order</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-text">
+        <p class="tagline">Handmade sewing creations + custom IT solutions</p>
+        <h1>Sell your creations and book custom tech work from one clean web app.</h1>
+        <p>
+          This starter store lets customers view handmade items, request custom sewing work,
+          and contact you for websites, apps, databases, cybersecurity help, and business tech support.
+        </p>
+        <div class="hero-actions">
+          <a href="#shop" class="btn primary">Shop Creations</a>
+          <a href="#it-services" class="btn secondary">Request IT Help</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="logo.svg" alt="App logo preview" />
+        <h2>Add to Home Screen</h2>
+        <p>Customers can save this site like an app on their phone.</p>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="shop" class="section">
+      <div class="section-title">
+        <p>Shop</p>
+        <h2>Featured Sewing Creations</h2>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section id="it-services" class="section alt">
+      <div class="section-title">
+        <p>Technology</p>
+        <h2>Custom IT App Services</h2>
+      </div>
+      <div class="service-grid">
+        <article class="card">
+          <h3>Custom Websites</h3>
+          <p>Business websites, portfolios, landing pages, and online stores.</p>
+        </article>
+        <article class="card">
+          <h3>Business Apps</h3>
+          <p>Simple web apps, calculators, forms, dashboards, and customer tools.</p>
+        </article>
+        <article class="card">
+          <h3>Database Help</h3>
+          <p>Data organization, SQL support, spreadsheets, and reporting systems.</p>
+        </article>
+        <article class="card">
+          <h3>Cybersecurity Basics</h3>
+          <p>Security checklists, account protection, backups, and safer workflows.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="custom-order" class="section">
+      <div class="order-box">
+        <div>
+          <p class="tagline">Custom requests</p>
+          <h2>Need a custom item or custom app?</h2>
+          <p>Use the form below to request sewing work, an IT service, or both.</p>
+        </div>
+
+        <form id="orderForm">
+          <label>
+            Name
+            <input type="text" id="name" required placeholder="Your name" />
+          </label>
+          <label>
+            Email
+            <input type="email" id="email" required placeholder="your@email.com" />
+          </label>
+          <label>
+            Request Type
+            <select id="requestType">
+              <option>Sewing creation</option>
+              <option>Custom IT app</option>
+              <option>Website</option>
+              <option>Both sewing and IT</option>
+            </select>
+          </label>
+          <label>
+            Message
+            <textarea id="message" required placeholder="Tell me what you need..."></textarea>
+          </label>
+          <button class="btn primary" type="submit">Create Email Request</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="contact-card">
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> yourname@example.com</p>
+        <p><strong>Phone:</strong> (000) 000-0000</p>
+        <p><strong>Location:</strong> Georgia, USA</p>
+        <p class="small">Edit this section in <code>index.html</code> with your real contact information.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> KIT Creations. Handmade sewing + custom IT apps.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
